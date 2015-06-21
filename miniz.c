@@ -161,6 +161,12 @@
 
 #include <stdlib.h>
 
+#if defined __GNUC__
+	// Ignore all warnings
+#	pragma GCC diagnostic push
+#	pragma GCC system_header
+#endif
+
 // Defines to completely disable specific portions of miniz.c:
 // If all macros here are defined the only functionality remaining will be CRC-32, adler-32, tinfl, and tdefl.
 
@@ -853,7 +859,7 @@ typedef enum
   TDEFL_STATUS_BAD_PARAM = -2,
   TDEFL_STATUS_PUT_BUF_FAILED = -1,
   TDEFL_STATUS_OKAY = 0,
-  TDEFL_STATUS_DONE = 1,
+  TDEFL_STATUS_DONE = 1
 } tdefl_status;
 
 // Must map to MZ_NO_FLUSH, MZ_SYNC_FLUSH, etc. enums
@@ -4914,3 +4920,7 @@ void *mz_zip_extract_archive_file_to_heap(const char *pZip_filename, const char 
 
   For more information, please refer to <http://unlicense.org/>
 */
+
+#if defined __GNUC__
+#pragma GCC diagnostic pop
+#endif
