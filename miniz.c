@@ -165,6 +165,11 @@ typedef unsigned char mz_validate_uint64[sizeof(mz_uint64)==8 ? 1 : -1];
 #include <string.h>
 #include <assert.h>
 
+#if (defined(__GNUC__) && (__GNUC__ >= 6))
+#	pragma GCC diagnostic push
+#	pragma GCC diagnostic ignored "-Wmisleading-indentation"
+#endif
+
 #define MZ_ASSERT(x) assert(x)
 
 #ifdef MINIZ_NO_MALLOC
@@ -4125,6 +4130,10 @@ void *mz_zip_extract_archive_file_to_heap(const char *pZip_filename, const char 
 
 #ifdef __cplusplus
 }
+#endif
+
+#if (defined(__GNUC__) && (__GNUC__ >= 6))
+#	pragma GCC diagnostic pop // ignored "-Wmisleading-indentation"
 #endif
 
 /*
